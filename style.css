@@ -1,0 +1,477 @@
+/* 1. ПОДКЛЮЧЕНИЕ ШРИФТОВ */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&family=Noto+Serif+Display:wdth,wght@62.5,100..900&family=Oooh+Baby&display=swap');
+
+/* --- ТВОЙ ПРЕЛОАДЕР (НЕ ТРОГАЕМ ЛОГИКУ) --- */
+body.preloader-active {
+  overflow: hidden;
+}
+
+#preloader {
+  position: fixed;
+  inset: 0;
+  background: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  overflow: hidden;
+  transition: opacity 1s ease; /* Плавное исчезновение */
+}
+
+.iris-wrapper {
+  position: relative;
+  width: 90vmin;
+  height: 90vmin;
+}
+
+.iris {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.heart {
+  position: absolute;
+  left: 50%;
+  bottom: 10%;
+  transform: translateX(-50%);
+  width: clamp(140px, 10vw, 180px);
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .iris-wrapper {
+    width: 140vmax;
+    height: 140vmax;
+  }
+  .iris { border-radius: 0; }
+  .heart {
+    position: fixed;
+    left: 50%;
+    bottom: 8vh;
+    transform: translateX(-50%);
+    width: 150px;
+  }
+}
+
+/* --- НАСТРОЙКИ ОСНОВНОГО САЙТА (ИСПРАВЛЕНО) --- */
+body {
+  margin: 0;
+  padding: 0;
+  background: #F3E0D0; /* ФОН НА ВЕСЬ САЙТ */
+  color: #554242;
+  font-family: 'Montserrat', sans-serif;
+}
+
+/* Вся страница сайта */
+#site {
+  display: none; 
+  width: 100%;
+  background-color: #F3E0D0; /* Фон на всю ширину окна */
+}
+
+.main-photo-wrapper {
+  line-height: 0;      /* Убирает межстрочный интервал */
+  font-size: 0;        /* Убирает любые пробельные символы */
+  margin: 0;           /* Обнуляем внешние отступы обертки */
+  padding: 0;          /* Обнуляем внутренние отступы обертки */
+  width: 100%;
+  overflow: hidden;
+}
+
+.main-photo-wrapper .full-width-img {
+  display: block;      /* Картинка ведет себя как блок */
+  margin: 0;
+ /* Дополнительная страховка от зазоров */
+}
+
+/* ГЛАВНЫЙ КОНТЕЙНЕР (то самое ограничение как для телефона) */
+.reveal-container {
+  width: 100%;
+  max-width: 500px; /* Оптимальная ширина "мобильной" версии на ПК */
+  margin: 0 auto;   /* Центрируем колонку на экране */
+  background-color: #F3E0D0;
+  padding-bottom: 50px;
+}
+
+/* Общий сброс для картинок, чтобы не было дырок снизу */
+.full-width-img {
+    width: 100%;
+    height: auto;
+    display: block; /* Убирает зазор снизу, который есть у inline-элементов */
+}
+
+/* КОНТЕЙНЕР ДЛЯ ВЕРХНЕГО ФОТО */
+.photo-top-wrapper {
+    width: 100%;
+    line-height: 0;   /* Страховка от отступов */
+    margin-bottom: 20px; /* Отступ от фото до заголовка "ДОРОГИЕ..." */
+}
+
+/* КОНТЕЙНЕР ДЛЯ НИЖНЕГО ФОТО */
+.photo-bottom-wrapper {
+    width: 100%;
+    line-height: 0;
+    /* Делаем отступ сверху, чтобы фото не прилипало к таймеру */
+    margin-top: clamp(40px, 8vw, 80px); 
+    /* Можно добавить небольшой padding снизу, чтобы картинка не касалась края экрана */
+    padding-bottom: 0; 
+}
+
+/* Убедись, что в .reveal-container нет лишних паддингов сверху */
+.reveal-container {
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+    background-color: #F3E0D0;
+    padding-bottom: 0; /* Убрал отсюда, так как фото теперь само регулирует низ */
+}
+
+/* 1. ЗАГОЛОВКИ (Плавно растут от 26px до 42px) */
+.main-title, 
+.section-title, 
+.date-title, 
+.final-title {
+  /* 26px - минимум (телефон)
+     5vw - растет вместе с экраном
+     42px - максимум (большой монитор) */
+  font-size: clamp(32px, 5vw, 42px); 
+  
+  font-family: 'Noto Serif Display', serif;
+  font-variation-settings: "wdth" 62.5; 
+  font-weight: 600;
+  text-transform: uppercase;
+  padding: 0 20px;
+  margin: 30px 0 15px 0;
+  line-height: 1.1;
+}
+
+/* 2. ОБЫЧНЫЙ ТЕКСТ (Плавно растет от 15px до 18px) */
+p, .event, .sub-date {
+  /* 15px - минимум
+     1.5vw - легкое увеличение
+     18px - комфортный максимум для чтения */
+  font-size: clamp(15px, 1.5vw, 18px);
+
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 400;
+  text-transform: none;
+  line-height: 1.6;
+  padding: 0 20px;
+  margin-bottom: 12px;
+  color: #554242;
+}
+
+/* Картинки всегда по ширине контейнера */
+.full-width-img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.map-button {
+  /* 1. ГАРАНТИРОВАННОЕ ЦЕНТРИРОВАНИЕ ТЕКСТА */
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  text-align: center;
+
+  /* 2. ГЕОМЕТРИЯ И ОТСТУПЫ */
+  width: 65%;           /* Ширина на мобильном */
+  max-width: 260px;     /* Ограничение для планшета/ПК */
+  
+  /* Отступы снаружи: 20px сверху, авто-центр по бокам, адаптив снизу */
+  margin-top: 20px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  margin-bottom: clamp(50px, 6vw, 70px) !important;
+  
+  /* Внутренняя высота (Padding) */
+  padding: 14px 0 !important; 
+  box-sizing: border-box; /* Чтобы padding не раздувал кнопку */
+
+  /* 3. СТИЛЬ */
+  background-color: #7D6C64;
+  color: #FFFFFF !important;
+  text-decoration: none;
+  border: none;
+  border-radius: 0;
+
+  /* 4. ШРИФТ (Montserrat Light) */
+  font-family: 'Montserrat', sans-serif !important;
+  font-weight: 300 !important;
+  font-size: clamp(13px, 3.5vw, 15px); /* Чуть уменьшили для мобилок */
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  white-space: nowrap;
+  
+  transition: opacity 0.3s ease;
+}
+
+.map-button:hover {
+  opacity: 0.9;
+  background-color: #6b5c55;
+}
+
+/* Красная надпись */
+.cursive-red {
+  font-family: 'Oooh Baby', cursive;
+  color: #872626;
+  
+  /* Масштабирование: от 20px до 28px */
+  font-size: clamp(23px, 3.5vw, 30px);
+  
+  display: block;
+  margin-left: 20px;
+  margin-top: -10px;
+  
+  /* Эффект легкого наклона */
+  transform: rotate(-7deg);
+  transform-origin: left;
+  
+  /* Убираем автоматический капс, если он наследовался */
+  text-transform: none; 
+
+  margin-bottom: clamp(50px, 6vw, 70px) !important;
+}
+
+/* --- ТАЙМИНГ (Лестница линий и текста) --- */
+.timeline {
+  margin: clamp(30px, 5vw, 50px) 5%; 
+  padding-left: 0; 
+  border-left: 1px solid #554242;
+  margin-bottom: clamp(50px, 6vw, 70px) !important;
+  position: relative;
+}
+
+.timeline-item { 
+    position: relative; 
+    margin-bottom: clamp(35px, 5vw, 50px); 
+    display: flex;
+    flex-direction: column;
+
+    /* ДОБАВЛЯЕМ ЭТУ СТРОКУ: */
+    padding-left: 20px; /* Это создаст зазор между концом линии и текстом */
+}
+
+/* ГЕОМЕТРИЯ ЛЕСТНИЦЫ */
+.timeline-item:nth-child(1) { margin-left: 80px; }
+.timeline-item:nth-child(2) { margin-left: 140px; }
+.timeline-item:nth-child(3) { margin-left: 200px; }
+.timeline-item:nth-child(4) { margin-left: 260px; }
+
+/* ГОРИЗОНТАЛЬНЫЕ ЛИНИИ */
+.timeline-item::before {
+  content: ''; 
+  position: absolute; 
+  top: 1.1rem; 
+  height: 1px;
+  background-color: #554242;
+}
+
+.timeline-item:nth-child(1)::before { width: 80px; left: -80px; }
+.timeline-item:nth-child(2)::before { width: 140px; left: -140px; }
+.timeline-item:nth-child(3)::before { width: 200px; left: -200px; }
+.timeline-item:nth-child(4)::before { width: 260px; left: -260px; }
+
+/* ВРЕМЯ (Цифры) */
+.time {
+  font-size: clamp(32px, 4vw, 42px);
+  font-family: 'Noto Serif Display', serif;
+  font-variation-settings: "wdth" 62.5;
+  font-weight: 500;
+  line-height: 1; /* Обрезает лишнее пространство сверху и снизу цифр */
+  color: #554242;
+  margin: 0;
+  padding: 0;
+}
+
+/* СОБЫТИЕ (Текст Montserrat) */
+.event {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 400; /* ДЕЛАЕМ ЖИРНЕЕ (500 или 600) */
+  font-size: clamp(14px, 1.5vw, 16px);
+  
+  /* РЕГУЛИРУЕМ ОТСТУП ТУТ */
+  margin-top: 4px; /* Уменьшили с 8px до 2px, чтобы текст "прилип" к цифрам */
+  
+  padding: 0; 
+  text-transform: none !important; /* Убираем капс, чтобы текст был как в HTML */
+  line-height: 1.2;
+  letter-spacing: 0.5px;
+}
+
+/* Дресс-код */
+.palette-container { 
+  display: flex; 
+  justify-content: center; 
+  gap: 5%;        /* Фиксированный небольшой зазор между цветами */
+  width: 90%;       /* Контейнер занимает 90% ширины экрана */
+  max-width: 400px; /* Но не становится шире 400px на больших экранах */
+  margin: 30px auto; 
+}
+
+.color-box { 
+  flex: 1;          /* МАГИЯ: каждый бокс забирает равную часть доступного места */
+  height: 35px;     /* Высота остается стабильной */
+  min-width: 0;     /* Позволяет боксам сжиматься меньше их содержимого */
+  
+  /* Если хочешь ограничить минимальную и максимальную ширину */
+  /* width: clamp(60px, 20vw, 100px); */
+}
+
+/* Коллаж (адаптивный) */
+.dress-collage {
+  position: relative;
+  height: 85vh;
+  margin: 20px;
+}
+.c-img { position: absolute; width: 45%; border-radius: 0; }
+.c1 { top: 0; left: 0; }
+.c2 { top: 40px; right: 0; }
+.c3 { top: 180px; left: 20%; width: 55%; z-index: 5; }
+
+/* Элегантная анкета с адаптивными заголовками */ 
+.styled-form { 
+  padding: 40px 20px; 
+} 
+/* Уменьшаем отступ под текстом-инструкцией */ 
+.form-section p { 
+  margin-bottom: clamp(10px, 3vw, 15px); /* Вместо стандартных больших отступов */ 
+} 
+/* Убираем лишний padding сверху у формы */ .styled-form { padding-top: 10px !important; /* Было 40px, делаем компактнее */ } /* Уменьшаем верхний отступ у самого первого поля в анкете */ .styled-form .input-group:first-child { margin-top: 0; } /* 1. МАСШТАБИРУЕМЫЕ ЗАГОЛОВКИ ПОЛЕЙ (Label) */ /* Это касается и текстовых полей, и вопроса про присутствие */ .input-group label, .radio-group-container label:first-child { display: block; font-family: 'Noto Serif Display', serif; font-variation-settings: "wdth" 62.5; font-weight: 500; color: #554242; /* 16px - минимум на маленьком телефоне 2vw - скорость роста 22px - максимум на большом мониторе */ font-size: clamp(20px, 2vw, 30px); margin-bottom: 10px; line-height: 1.2; } /* 2. МАСШТАБИРУЕМЫЙ ТЕКСТ ВНУТРИ ПОЛЕЙ И ВАРИАНТОВ ВЫБОРА */ .input-group input, .radio-label { font-family: 'Montserrat', sans-serif; font-weight: 300; color: #554242; /* 14px на мобильном, до 18px на ПК */ font-size: clamp(14px, 1.2vw, 18px); } /* --- ОСТАЛЬНЫЕ СТИЛИ БЕЗ ИЗМЕНЕНИЙ (Линии и кнопки) --- */ .input-group { margin-bottom: clamp(25px, 4vw, 45px); /* Отступы между полями тоже теперь адаптивные */ border-bottom: 1px solid rgba(85, 66, 66, 0.4); position: relative; } .input-group input { width: 100%; background: transparent; border: none; padding: 10px 0; outline: none; } .input-group input:focus { border-bottom: 1px solid #554242; } /* Радиокнопки */ .radio-group-container { margin-bottom: clamp(25px, 4vw, 45px); } .radio-label { display: flex; align-items: center; margin-bottom: 12px; cursor: pointer; padding-left: 5px; } .radio-label input[type="radio"] { margin-right: 12px; accent-color: #7D6C64; /* Размер шарика тоже немного масштабируем */ width: clamp(16px, 1.5vw, 20px); height: clamp(16px, 1.5vw, 20px); cursor: pointer; } /* Кнопка ОТПРАВИТЬ */ .submit-btn { display: flex; justify-content: center; align-items: center; width: 100%; max-width: 260px; margin: 40px auto 0; background-color: #7D6C64; color: #FFFFFF; border: none; font-family: 'Montserrat', sans-serif; font-weight: 300; text-transform: uppercase; letter-spacing: 1.5px; padding: clamp(12px, 2vw, 18px) 0; /* Адаптивная высота кнопки */ font-size: clamp(13px, 1.5vw, 16px); /* Адаптивный шрифт кнопки */ cursor: pointer; transition: opacity 0.3s; } .submit-btn:hover { opacity: 0.9; }
+
+.phone-number {
+  font-family: 'Noto Serif Display', serif;
+  font-variation-settings: "wdth" 62.5; /* Тот самый узкий стиль */
+  font-weight: 500;
+  text-align: left;
+  
+  /* Масштабирование: 28px на телефоне, 35px на ПК */
+  font-size: clamp(28px, 4vw, 35px);
+  
+  padding: 0 20px; /* Отступ слева, чтобы не липло к краю */
+  margin: 10px 0 40px 0; /* Небольшой отступ сверху и побольше снизу до таймера */
+  color: #554242;
+  text-decoration: none; /* Убирает подчеркивание, если это ссылка */
+  display: block;
+
+  margin-top: 20px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  margin-bottom: clamp(50px, 6vw, 70px) !important;
+}
+
+/* Финальный таймер */
+.final-timer { 
+  display: flex; 
+  justify-content: flex-start; /* Выравнивание по левому краю */
+  align-items: baseline; 
+  margin: 30px 0;
+  padding: 0 20px;            /* Отступ слева, чтобы совпадало с текстом */
+  gap: 25px;                  /* Расстояние между блоками */
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.timer-item {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;    /* Подписи тоже по левому краю под цифрой */
+}
+
+.timer-item span { 
+  font-family: 'Noto Serif Display', serif; 
+  font-variation-settings: "wdth" 62.5;
+  font-weight: 500;
+  display: block; 
+  
+  /* Масштабирование: от 32px до 42px */
+  font-size: clamp(32px, 4.5vw, 42px); 
+  line-height: 1;
+}
+
+.timer-item small { 
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 300;
+  margin-top: 5px; 
+  font-size: 12px; 
+  text-transform: lowercase;
+  color: #554242;
+}
+
+/* Анимации появления */
+.reveal { opacity: 0; transform: translateY(30px); transition: 1.2s ease; }
+.reveal.active { opacity: 1; transform: translateY(0); }
+
+@media (min-width: 1024px) {
+  .reveal-container { max-width: 800px; }
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 1.2s ease, transform 1.2s ease;
+}
+
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Модальное окно */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4); /* затемнение */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  z-index: 9999;
+}
+
+.modal.active {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.modal-content {
+  background: rgba(255, 255, 255, 0.85); /* полупрозрачность */
+  backdrop-filter: blur(10px);
+  padding: 30px 25px;
+  border-radius: 12px;
+  text-align: center;
+  width: 80%;
+  max-width: 320px;
+  position: relative;
+}
+
+/* Текст */
+.modal-content p {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 16px;
+  color: #554242;
+  margin: 0;
+}
+
+/* Крестик */
+.close-modal {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 22px;
+  cursor: pointer;
+  color: #554242;
+  transition: opacity 0.2s;
+}
+
+.close-modal:hover {
+  opacity: 0.6;
+}
